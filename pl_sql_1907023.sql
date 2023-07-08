@@ -146,15 +146,37 @@ begin
 select status into c_status from Claim where claim_id = var1;
 return c_status;
 end;
+CREATE OR REPLACE TRIGGER update_claim_date
+BEFORE INSERT ON Claim
+FOR EACH ROW
+BEGIN
+    :NEW.claim_date := SYSDATE;
+END;
 /
 
---set serveroutput on
---declare
---check varchar(20);
---begin
---check := funtest(7);
---end;
---/
+CREATE OR REPLACE TRIGGER update_payment_date
+BEFORE INSERT ON Payment
+FOR EACH ROW
+BEGIN
+    :NEW.payment_date := SYSDATE;
+END;
+/
+CREATE OR REPLACE TRIGGER update_payment_date
+BEFORE INSERT ON Payment
+FOR EACH ROW
+BEGIN
+    :NEW.payment_date := SYSDATE;
+END;
+/
+
+CREATE OR REPLACE TRIGGER update_start_date
+BEFORE INSERT ON Policy
+FOR EACH ROW
+BEGIN
+    :NEW.start_date := SYSDATE;
+END;
+/
+
 
 
 
